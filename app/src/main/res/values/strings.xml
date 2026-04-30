@@ -63,5 +63,6 @@
     <string name="logo">Logo</string>
     <string name="receipt_title_text">Vasantshrushti Farm\nAt Mali Stop, Tarapur Boisar Road\nBoisar West - 401502\nContact: 9892125375/8169076958</string>
     <string name="receipt_footer">Thanks for choosing our farm for your enjoyment.\nRajesh V. Mhatre\nVasantshrushti Farm \n\nAdvance payment made will not be refundable if booking is cancelled by you or as per government policy</string>
+    <string name="available_accommodations">Available Accommodations</string>
 
 </resources>

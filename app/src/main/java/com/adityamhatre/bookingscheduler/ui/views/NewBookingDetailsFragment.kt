@@ -37,23 +37,23 @@ import java.time.Instant
 import java.time.ZoneId
 
 
-class NewBookingDetailsFragment(
-    private val checkInDateTime: AppDateTime,
-    private val checkOutDateTime: AppDateTime,
-    private val accommodationSet: Set<Accommodation>,
-    val editMode: Boolean = false,
-    private val originalBookingDetails: BookingDetails? = null,
-    private val adapterPosition: Int = -1,
-    private val adapter: BookingListAdapter? = null,
-    private val adapterContainer: AdapterContainer<BookingListAdapter> = AdapterContainer()
-) : Fragment() {
+class NewBookingDetailsFragment() : Fragment() {
+
+    private var checkInDateTime: AppDateTime? = null
+    private var checkOutDateTime: AppDateTime? = null
+    private var accommodationSet: Set<Accommodation>? = null
+    var editMode: Boolean = false
+    private var originalBookingDetails: BookingDetails? = null
+    private var adapterPosition: Int = -1
+    private var adapter: BookingListAdapter? = null
+    private var adapterContainer: AdapterContainer<BookingListAdapter> = AdapterContainer()
 
     private val viewModel: NewBookingDetailsViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.checkInDateTime = checkInDateTime
-        viewModel.checkOutDateTime = checkOutDateTime
-        viewModel.accommodationSet = accommodationSet
+        viewModel.checkInDateTime = checkInDateTime ?: AppDateTime(-1, -1, -1)
+        viewModel.checkOutDateTime = checkOutDateTime ?: AppDateTime(-1, -1, -1)
+        viewModel.accommodationSet = accommodationSet ?: emptySet()
         if (editMode) {
             viewModel.fillValues(originalBookingDetails!!)
         }
@@ -319,12 +319,12 @@ class NewBookingDetailsFragment(
             accommodationSet: Set<Accommodation>,
             adapterContainer: AdapterContainer<BookingListAdapter>
         ) =
-            NewBookingDetailsFragment(
-                checkInDateTime,
-                checkOutDateTime,
-                accommodationSet,
-                adapterContainer = adapterContainer
-            )
+            NewBookingDetailsFragment().apply {
+                this.checkInDateTime = checkInDateTime
+                this.checkOutDateTime = checkOutDateTime
+                this.accommodationSet = accommodationSet
+                this.adapterContainer = adapterContainer
+            }
 
         @JvmStatic
         fun newInstance(
@@ -332,15 +332,15 @@ class NewBookingDetailsFragment(
             bookingDetails: BookingDetails,
             adapter: BookingListAdapter
         ): NewBookingDetailsFragment {
-            return NewBookingDetailsFragment(
-                bookingDetails.checkIn.toAppDateTime(),
-                bookingDetails.checkOut.toAppDateTime(),
-                bookingDetails.accommodations,
-                editMode = true,
-                bookingDetails,
-                adapterPosition,
-                adapter
-            )
+            return NewBookingDetailsFragment().apply {
+                this.checkInDateTime = bookingDetails.checkIn.toAppDateTime()
+                this.checkOutDateTime = bookingDetails.checkOut.toAppDateTime()
+                this.accommodationSet = bookingDetails.accommodations
+                this.editMode = true
+                this.originalBookingDetails = bookingDetails
+                this.adapterPosition = adapterPosition
+                this.adapter = adapter
+            }
         }
     }
 }

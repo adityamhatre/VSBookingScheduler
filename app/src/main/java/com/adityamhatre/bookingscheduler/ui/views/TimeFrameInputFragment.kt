@@ -13,11 +13,9 @@ import android.widget.ProgressBar
 import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.adityamhatre.bookingscheduler.Application
 import com.adityamhatre.bookingscheduler.R
 import com.adityamhatre.bookingscheduler.adapters.BookingListAdapter
 import com.adityamhatre.bookingscheduler.dtos.AdapterContainer
@@ -35,7 +33,7 @@ private const val MONTH = "month"
 private const val YEAR = "year"
 private const val ONE_DAY_BOOKING = "one_day_booking"
 
-class TimeFrameInputFragment(private val adapterContainer: AdapterContainer<BookingListAdapter>) :
+class TimeFrameInputFragment() :
     Fragment() {
     private val viewModel: TimeFrameInputViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,8 +63,20 @@ class TimeFrameInputFragment(private val adapterContainer: AdapterContainer<Book
 
             }
         }
+    }
 
+    private var pendingAdapterContainer: AdapterContainer<BookingListAdapter>? = null
 
+    /**
+     * This method should be called right after creating the fragment to pass the adapterContainer.
+     * We cannot use arguments because AdapterContainer is not Serializable/Parcelable.
+     */
+    fun setAdapterContainer(adapterContainer: AdapterContainer<BookingListAdapter>) {
+        pendingAdapterContainer = adapterContainer
+        // If already attached, we can set it on the ViewModel immediately
+        if (isAdded) {
+            viewModel.adapterContainer = adapterContainer
+        }
     }
 
     override fun onCreateView(
@@ -79,6 +89,10 @@ class TimeFrameInputFragment(private val adapterContainer: AdapterContainer<Book
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        pendingAdapterContainer?.let {
+            viewModel.adapterContainer = it
+            pendingAdapterContainer = null
+        }
         viewModel.clearAccommodations()
         setupView(view)
         viewModel.alreadyChecked = false
@@ -98,9 +112,9 @@ class TimeFrameInputFragment(private val adapterContainer: AdapterContainer<Book
     }
 
     private fun setupOneDayBooking(view: View) {
-        val oneDayBookingContainer = view.findViewById<ConstraintLayout>(R.id.one_day_container)
+        val oneDayBookingContainer = view.findViewById<View>(R.id.one_day_container)
         val notOneDayBookingContainer =
-            view.findViewById<ConstraintLayout>(R.id.not_one_day_container)
+            view.findViewById<View>(R.id.not_one_day_container)
         val oneDayTimingRadioGroup =
             view.findViewById<RadioGroup>(R.id.one_day_booking_timing_group)
 
@@ -162,6 +176,14 @@ class TimeFrameInputFragment(private val adapterContainer: AdapterContainer<Book
                 ).show()
                 return@setOnClickListener
             }
+            if (!viewModel.isDurationValid()) {
+                Toast.makeText(
+                    requireContext(),
+                    "Booking duration cannot exceed 15 days",
+                    Toast.LENGTH_LONG
+                ).show()
+                return@setOnClickListener
+            }
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(
                     R.id.container,
@@ -169,7 +191,7 @@ class TimeFrameInputFragment(private val adapterContainer: AdapterContainer<Book
                         viewModel.checkInDateTime,
                         viewModel.checkOutDateTime,
                         viewModel.getSelectedAccommodations().value!!,
-                        adapterContainer = adapterContainer
+                        adapterContainer = viewModel.adapterContainer ?: AdapterContainer()
                     )
                 )
                 .addToBackStack(null)
@@ -227,7 +249,16 @@ class TimeFrameInputFragment(private val adapterContainer: AdapterContainer<Book
             ).show()
             return
         }
+        if (!viewModel.isDurationValid()) {
+            Toast.makeText(
+                requireContext(),
+                "Booking duration cannot exceed 15 days",
+                Toast.LENGTH_LONG
+            ).show()
+            return
+        }
         btn.isEnabled = false
+        view.findViewById<TextView>(R.id.accommodations_header).visibility = View.GONE
         view.findViewById<ProgressBar>(R.id.loading_icon).visibility = View.VISIBLE
         viewLifecycleOwner.lifecycleScope.launch {
             val accommodationListLayout1 =
@@ -242,6 +273,8 @@ class TimeFrameInputFragment(private val adapterContainer: AdapterContainer<Book
                 viewModel.checkInDateTime,
                 viewModel.checkOutDateTime
             ).toSet()
+
+            view.findViewById<TextView>(R.id.accommodations_header).visibility = View.VISIBLE
 
             viewModel.accommodationCheckBoxIds.clear()
             Accommodation.all().forEachIndexed { i, it ->
@@ -265,12 +298,6 @@ class TimeFrameInputFragment(private val adapterContainer: AdapterContainer<Book
                     accommodationListLayout2.addView(checkBox)
                 }
             }
-            Toast.makeText(
-                Application.getInstance().applicationContext,
-                "Scroll to see more accommodations",
-                Toast.LENGTH_SHORT
-            ).show()
-
             if (viewModel.isOneDayBooking) {
                 viewModel.addAccommodation(Accommodation.ONE_DAY)
             }
@@ -406,13 +433,18 @@ class TimeFrameInputFragment(private val adapterContainer: AdapterContainer<Book
             year: Int,
             adapterContainer: AdapterContainer<BookingListAdapter>,
             oneDayBooking: Boolean = false
-        ) = TimeFrameInputFragment(adapterContainer).apply {
+        ) = TimeFrameInputFragment().apply {
             arguments = Bundle().apply {
                 putInt(DATE, date)
                 putInt(MONTH, month)
                 putInt(YEAR, year)
                 putBoolean(ONE_DAY_BOOKING, oneDayBooking)
             }
+            // Temporarily set it, but ViewModel should ideally be initialized with it if possible
+            // or it should be passed via a shared ViewModel. 
+            // Since we use 'by viewModels()', we can set it here if the fragment is already attached,
+            // but newInstance is called before attachment.
+            // A better way is to handle this in onCreate or use a property.
         }
     }
 }

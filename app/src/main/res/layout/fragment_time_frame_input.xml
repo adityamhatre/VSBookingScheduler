@@ -5,261 +5,264 @@
     android:layout_height="match_parent"
     android:padding="8dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/one_day_container"
+    <!-- Top Input Section (Always Visible or First thing seen) -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/main_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/check_availability"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/select_timings_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/one_day_booking_select_one_of_the_timings"
-            android:textAlignment="center"
-            android:textColor="@color/title_color"
-            android:textSize="16sp"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <RadioGroup
-            android:id="@+id/one_day_booking_timing_group"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/select_timings_text">
-
-            <RadioButton
-                android:id="@+id/one_day_booking_timing_9_30_am_to_5_00_pm"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="@string/_9_30_am_to_5_00_pm" />
-
-            <RadioButton
-                android:id="@+id/one_day_booking_timing_4_00_pm_to_11_55_pm"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/_4_00_pm_to_11_55_pm" />
-
-        </RadioGroup>
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/not_one_day_container"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/check_availability"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/check_in_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/app_name"
-            android:textAlignment="center"
-            android:textColor="@color/title_color"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <RadioGroup
-            android:id="@+id/check_in_time"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/check_in_date">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/check_in_time"
-                android:textColor="@color/title_color" />
-
-            <RadioButton
-                android:id="@+id/_9_30am"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="@string/_9_30_am" />
-
-            <RadioButton
-                android:id="@+id/_5_30pm"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/_5_30_pm" />
-
-        </RadioGroup>
-
-        <TextView
-            android:id="@+id/checkoutText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/select_check_out_date_and_time"
-            android:textColor="@color/title_color"
-            app:layout_constraintTop_toBottomOf="@+id/check_in_time" />
-
-        <DatePicker
-            android:id="@+id/check_out_date_picker"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:calendarViewShown="false"
-            android:clickable="false"
-            android:datePickerMode="spinner"
-            android:focusable="false"
-            app:layout_constraintBottom_toTopOf="@+id/check_out_time"
-            app:layout_constraintTop_toBottomOf="@+id/checkoutText" />
-
-        <RadioGroup
-            android:id="@+id/check_out_time"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent">
-
-            <RadioButton
-                android:id="@+id/_9am"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/_9_00_am" />
-
-            <RadioButton
-                android:id="@+id/_5pm"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="@string/_5_00_pm" />
-
-        </RadioGroup>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    <Button
-        android:id="@+id/check_availability"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/check_availability"
-        app:layout_constraintBottom_toTopOf="@+id/guideline40" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline40"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.5" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/results"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:paddingBottom="16dp"
         app:layout_constraintBottom_toTopOf="@+id/next"
-        app:layout_constraintTop_toBottomOf="@+id/guideline40">
+        app:layout_constraintTop_toTopOf="parent">
 
-        <ProgressBar
-            android:id="@+id/loading_icon"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:indeterminate="true"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:orientation="vertical">
 
-
-        <ScrollView
-            android:id="@+id/left_scroll_view"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/bungalow5_1"
-            app:layout_constraintEnd_toStartOf="@+id/guideline50"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <LinearLayout
-                android:id="@+id/accommodation_list1"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/one_day_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:visibility="gone">
 
-            </LinearLayout>
-        </ScrollView>
+                <TextView
+                    android:id="@+id/select_timings_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/one_day_booking_select_one_of_the_timings"
+                    android:textAlignment="center"
+                    android:textColor="@color/title_color"
+                    android:textSize="16sp"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <ScrollView
-            android:id="@+id/right_scroll_view"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/bungalow5_1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/guideline50"
-            app:layout_constraintTop_toTopOf="parent">
+                <RadioGroup
+                    android:id="@+id/one_day_booking_timing_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/select_timings_text">
 
-            <LinearLayout
-                android:id="@+id/accommodation_list2"
+                    <RadioButton
+                        android:id="@+id/one_day_booking_timing_9_30_am_to_5_00_pm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="@string/_9_30_am_to_5_00_pm" />
+
+                    <RadioButton
+                        android:id="@+id/one_day_booking_timing_4_00_pm_to_11_55_pm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/_4_00_pm_to_11_55_pm" />
+
+                </RadioGroup>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/not_one_day_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/check_in_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/app_name"
+                    android:textAlignment="center"
+                    android:textColor="@color/title_color"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <RadioGroup
+                    android:id="@+id/check_in_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@+id/check_in_date">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/check_in_time"
+                        android:textColor="@color/title_color" />
+
+                    <RadioButton
+                        android:id="@+id/_9_30am"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="@string/_9_30_am" />
+
+                    <RadioButton
+                        android:id="@+id/_5_30pm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/_5_30_pm" />
+
+                </RadioGroup>
+
+                <TextView
+                    android:id="@+id/checkoutText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/select_check_out_date_and_time"
+                    android:textColor="@color/title_color"
+                    app:layout_constraintTop_toBottomOf="@+id/check_in_time" />
+
+                <DatePicker
+                    android:id="@+id/check_out_date_picker"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:calendarViewShown="false"
+                    android:clickable="false"
+                    android:datePickerMode="spinner"
+                    android:focusable="false"
+                    app:layout_constraintTop_toBottomOf="@+id/checkoutText" />
+
+                <RadioGroup
+                    android:id="@+id/check_out_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@+id/check_out_date_picker">
+
+                    <RadioButton
+                        android:id="@+id/_9am"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/_9_00_am" />
+
+                    <RadioButton
+                        android:id="@+id/_5pm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="@string/_5_00_pm" />
+
+                </RadioGroup>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Button
+                android:id="@+id/check_availability"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_marginTop="8dp"
+                android:text="@string/check_availability" />
 
-            </LinearLayout>
-        </ScrollView>
+            <!-- Results Section -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/results"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:minHeight="100dp">
 
-        <Button
-            android:id="@+id/bungalow5_1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
-            android:text="@string/bungalow_5_1"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/guideline33"
-            app:layout_constraintStart_toStartOf="parent" />
+                <ProgressBar
+                    android:id="@+id/loading_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:indeterminate="true"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/bungalow_and_rooms"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
-            android:text="@string/bungalow_and_rooms"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/guideline66"
-            app:layout_constraintStart_toEndOf="@+id/guideline33" />
+                <TextView
+                    android:id="@+id/accommodations_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="@string/available_accommodations"
+                    android:textAlignment="center"
+                    android:textColor="@color/title_color"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/select_all"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:text="@string/select_all"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/guideline66" />
+                <LinearLayout
+                    android:id="@+id/accommodation_lists_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@id/accommodations_header">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline50"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent=".5" />
+                    <LinearLayout
+                        android:id="@+id/accommodation_list1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline33"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent=".33" />
+                    <LinearLayout
+                        android:id="@+id/accommodation_list2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical" />
+                </LinearLayout>
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline66"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent=".66" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <Button
+                    android:id="@+id/bungalow5_1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="4dp"
+                    android:text="@string/bungalow_5_1"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline33"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/accommodation_lists_container" />
 
+                <Button
+                    android:id="@+id/bungalow_and_rooms"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    android:text="@string/bungalow_and_rooms"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@+id/bungalow5_1"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline66"
+                    app:layout_constraintStart_toEndOf="@+id/guideline33"
+                    app:layout_constraintTop_toTopOf="@+id/bungalow5_1" />
+
+                <Button
+                    android:id="@+id/select_all"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="@string/select_all"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@+id/bungalow5_1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/guideline66"
+                    app:layout_constraintTop_toTopOf="@+id/bungalow5_1" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline33"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent=".33" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline66"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent=".66" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Proceed button fixed at bottom -->
     <Button
         android:id="@+id/next"
         android:layout_width="match_parent"
@@ -267,6 +270,5 @@
         android:enabled="false"
         android:text="@string/proceed"
         app:layout_constraintBottom_toBottomOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

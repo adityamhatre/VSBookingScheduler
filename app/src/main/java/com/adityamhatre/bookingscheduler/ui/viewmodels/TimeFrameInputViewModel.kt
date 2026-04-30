@@ -3,13 +3,17 @@ package com.adityamhatre.bookingscheduler.ui.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.adityamhatre.bookingscheduler.adapters.BookingListAdapter
+import com.adityamhatre.bookingscheduler.dtos.AdapterContainer
 import com.adityamhatre.bookingscheduler.dtos.AppDateTime
 import com.adityamhatre.bookingscheduler.enums.Accommodation
 import com.adityamhatre.bookingscheduler.service.BookingsService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.time.Duration
 
 class TimeFrameInputViewModel : ViewModel() {
+    var adapterContainer: AdapterContainer<BookingListAdapter>? = null
     val accommodationCheckBoxIds = mutableListOf<Int>()
     var selectWholeResort = false
     var bungalow51Selected = false
@@ -56,4 +60,10 @@ class TimeFrameInputViewModel : ViewModel() {
 
     fun isValid() =
         checkInDateTime.isValid() && checkOutDateTime.isValid() && selectedAccommodations.value!!.isNotEmpty()
+
+    fun isDurationValid(): Boolean {
+        if (!checkInDateTime.isValid() || !checkOutDateTime.isValid()) return false
+        val duration = Duration.between(checkInDateTime.toInstant(), checkOutDateTime.toInstant())
+        return duration.toDays() <= 15
+    }
 }

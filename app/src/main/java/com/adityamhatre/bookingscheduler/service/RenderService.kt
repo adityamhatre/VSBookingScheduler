@@ -116,13 +116,17 @@ class RenderService(context: Context) {
     }
 
     fun getBookingSummary(callback: (JSONObject) -> Unit) {
+        val startTime = System.currentTimeMillis()
         val request = StringRequest(Request.Method.GET,
             "$baseUrl/bookingsSummary",
             { response ->
+                println("getBookingSummary took ${System.currentTimeMillis() - startTime}ms")
                 val validResponse = JSONObject(response)
                 callback(validResponse)
             },
-            {}
+            { error ->
+                println("getBookingSummary failed after ${System.currentTimeMillis() - startTime}ms: ${error.message}")
+            }
         )
 
         request.setShouldCache(false)

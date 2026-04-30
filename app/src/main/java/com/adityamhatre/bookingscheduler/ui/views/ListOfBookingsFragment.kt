@@ -146,7 +146,9 @@ class ListOfBookingsFragment : Fragment() {
                         viewModel.bookingsOn.month,
                         year = viewModel.bookingsOn.year,
                         adapterContainer = viewModel.adapterContainer,
-                    )
+                    ).apply {
+                        setAdapterContainer(viewModel.adapterContainer)
+                    }
                 )
                 .addToBackStack(null)
                 .commit()
@@ -163,7 +165,9 @@ class ListOfBookingsFragment : Fragment() {
                         year = viewModel.bookingsOn.year,
                         adapterContainer = viewModel.adapterContainer,
                         oneDayBooking = true
-                    )
+                    ).apply {
+                        setAdapterContainer(viewModel.adapterContainer)
+                    }
                 )
                 .addToBackStack(null)
                 .commit()
