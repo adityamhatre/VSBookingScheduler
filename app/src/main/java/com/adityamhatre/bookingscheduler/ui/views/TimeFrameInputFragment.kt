@@ -13,6 +13,7 @@ import android.widget.ProgressBar
 import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -160,6 +161,7 @@ class TimeFrameInputFragment() :
         val accommodationListLayout2 =
             view.findViewById<LinearLayout>(R.id.accommodation_list2)
         accommodationListLayout2.removeAllViews()
+        view.findViewById<View>(R.id.results_card).visibility = View.GONE
     }
 
     private fun setupNext(view: View) {
@@ -258,6 +260,7 @@ class TimeFrameInputFragment() :
             return
         }
         btn.isEnabled = false
+        view.findViewById<View>(R.id.results_card).visibility = View.VISIBLE
         view.findViewById<TextView>(R.id.accommodations_header).visibility = View.GONE
         view.findViewById<ProgressBar>(R.id.loading_icon).visibility = View.VISIBLE
         viewLifecycleOwner.lifecycleScope.launch {
@@ -308,6 +311,10 @@ class TimeFrameInputFragment() :
             setupBungalow51Button(view)
             setupBungalowAndRoomsButton(view)
             btn.isEnabled = true
+            val scrollView = view.findViewById<NestedScrollView>(R.id.main_scroll_view)
+            scrollView.post {
+                scrollView.smoothScrollTo(0, scrollView.getChildAt(0).height)
+            }
         }
     }
 
