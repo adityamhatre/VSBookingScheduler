@@ -2,13 +2,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Android Studio Projects/VSBookingSchedular/app/src/main/res/layout/booking_details_card.xml" value="0.25" />
-        <entry key="..\:/Android Studio Projects/VSBookingSchedular/app/src/main/res/layout/fragment_google_sign_in_fragment.xml" value="0.22916666666666666" />
-        <entry key="..\:/Android Studio Projects/VSBookingSchedular/app/src/main/res/layout/fragment_list_of_bookings.xml" value="0.33" />
-        <entry key="..\:/Android Studio Projects/VSBookingSchedular/app/src/main/res/layout/fragment_new_booking_details.xml" value="0.45925925925925926" />
-        <entry key="..\:/Android Studio Projects/VSBookingSchedular/app/src/main/res/layout/fragment_time_frame_input.xml" value="0.45925925925925926" />
-        <entry key="..\:/Android Studio Projects/VSBookingSchedular/app/src/main/res/layout/main_fragment.xml" value="0.6723958333333333" />
-        <entry key="..\:/Android Studio Projects/VSBookingSchedular/app/src/main/res/layout/month_view.xml" value="0.5229166666666667" />
+        <entry key="..\:/Android Studio Projects/VSBookingScheduler/app/src/main/res/layout/booking_details_card.xml" value="0.25" />
+        <entry key="..\:/Android Studio Projects/VSBookingScheduler/app/src/main/res/layout/fragment_google_sign_in_fragment.xml" value="0.22916666666666666" />
+        <entry key="..\:/Android Studio Projects/VSBookingScheduler/app/src/main/res/layout/fragment_list_of_bookings.xml" value="0.33" />
+        <entry key="..\:/Android Studio Projects/VSBookingScheduler/app/src/main/res/layout/fragment_new_booking_details.xml" value="0.45925925925925926" />
+        <entry key="..\:/Android Studio Projects/VSBookingScheduler/app/src/main/res/layout/fragment_time_frame_input.xml" value="0.45925925925925926" />
+        <entry key="..\:/Android Studio Projects/VSBookingScheduler/app/src/main/res/layout/main_fragment.xml" value="0.6723958333333333" />
+        <entry key="..\:/Android Studio Projects/VSBookingScheduler/app/src/main/res/layout/month_view.xml" value="0.5229166666666667" />
       </map>
     </option>
   </component>
