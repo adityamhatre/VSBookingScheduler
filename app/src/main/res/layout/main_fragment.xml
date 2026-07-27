@@ -684,6 +684,90 @@
                 month_view:month="December"
                 month_view:year="2027" />
 
+            <com.adityamhatre.bookingscheduler.customViews.MonthView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp"
+                month_view:month="January"
+                month_view:year="2028" />
+
+            <com.adityamhatre.bookingscheduler.customViews.MonthView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp"
+                month_view:month="February"
+                month_view:year="2028" />
+
+            <com.adityamhatre.bookingscheduler.customViews.MonthView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp"
+                month_view:month="March"
+                month_view:year="2028" />
+
+            <com.adityamhatre.bookingscheduler.customViews.MonthView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp"
+                month_view:month="April"
+                month_view:year="2028" />
+
+            <com.adityamhatre.bookingscheduler.customViews.MonthView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp"
+                month_view:month="May"
+                month_view:year="2028" />
+
+            <com.adityamhatre.bookingscheduler.customViews.MonthView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp"
+                month_view:month="June"
+                month_view:year="2028" />
+
+            <com.adityamhatre.bookingscheduler.customViews.MonthView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp"
+                month_view:month="July"
+                month_view:year="2028" />
+
+            <com.adityamhatre.bookingscheduler.customViews.MonthView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp"
+                month_view:month="August"
+                month_view:year="2028" />
+
+            <com.adityamhatre.bookingscheduler.customViews.MonthView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp"
+                month_view:month="September"
+                month_view:year="2028" />
+
+            <com.adityamhatre.bookingscheduler.customViews.MonthView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp"
+                month_view:month="October"
+                month_view:year="2028" />
+
+            <com.adityamhatre.bookingscheduler.customViews.MonthView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp"
+                month_view:month="November"
+                month_view:year="2028" />
+
+            <com.adityamhatre.bookingscheduler.customViews.MonthView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp"
+                month_view:month="December"
+                month_view:year="2028" />
+
             <!-- TODO: FIND A A WAY TO AUTOMATE THIS-->
             <!-- TODO: Just call MainFragment.printMonths and copy the output here -->
 

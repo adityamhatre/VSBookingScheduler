@@ -17,19 +17,19 @@ enum class Accommodation(val readableName: String, val calendarId: String) {
         Application.getApplicationContext().getString(R.string.special_room_2_id)
     ),
     ROOM_1_VIHAR(
-        "Room 1 (Vihar)",
+        "Deluxe Room 1 (Vihar)",
         Application.getApplicationContext().getString(R.string.room_1_id)
     ),
     ROOM_2_VISHAVA(
-        "Room 2 (Vishava)",
+        "Deluxe Room 2 (Vishava)",
         Application.getApplicationContext().getString(R.string.room_2_id)
     ),
     ROOM_3_VISHRAM(
-        "Room 3 (Vishram)",
+        "Deluxe Room 3 (Vishram)",
         Application.getApplicationContext().getString(R.string.room_3_id)
     ),
     ROOM_4_VISHRANT(
-        "Room 4 (Vishrant)",
+        "Deluxe Room 4 (Vishrant)",
         Application.getApplicationContext().getString(R.string.room_4_id)
     ),
     NIVANT("Nivant", Application.getApplicationContext().getString(R.string.nivant_id)),
@@ -45,7 +45,7 @@ enum class Accommodation(val readableName: String, val calendarId: String) {
         "Bungalow (5 + 1)",
         Application.getApplicationContext().getString(R.string.bungalow_3_1_id)
     ),
-    BIG_LAWN("Big Lawn", Application.getApplicationContext().getString(R.string.big_lawn)),
+    BIG_LAWN("Kumudini Lawn", Application.getApplicationContext().getString(R.string.big_lawn)),
     AARAM_LAWN(
         "Lawn in front of Aaram Bungalow",
         Application.getApplicationContext().getString(R.string.aaram_lawn)
@@ -55,7 +55,7 @@ enum class Accommodation(val readableName: String, val calendarId: String) {
         Application.getApplicationContext().getString(R.string.four_room_lawn)
     ),
     NIVANT_ASHTAKON_LAWN(
-        "Lawn near Nivant & Ashtakon",
+        "Ramai Lawn",
         Application.getApplicationContext().getString(R.string.nivant_ashtakon_lawn)
     ),
     NEW_ASHTAKON_LAWN(
