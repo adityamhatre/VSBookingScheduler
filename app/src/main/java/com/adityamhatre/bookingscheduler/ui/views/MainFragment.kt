@@ -87,6 +87,12 @@ class MainFragment : Fragment() {
         val maxYear = maxCalendar.get(Calendar.YEAR)
         val maxMonth = maxCalendar.get(Calendar.MONTH) + 1
 
+        // Show past months starting from 4 months ago
+        val minCalendar = Calendar.getInstance(TimeZone.getTimeZone(ZoneId.systemDefault()))
+        minCalendar.add(Calendar.MONTH, -4)
+        val minYear = minCalendar.get(Calendar.YEAR)
+        val minMonth = minCalendar.get(Calendar.MONTH) + 1
+
         // 1. Appends new MonthViews programmatically if they are not yet in the layout
         var (lastMonth, lastYear) = (monthsList[monthsList.childCount - 1] as MonthView).getMonthYear()
         while (lastYear < maxYear || (lastYear == maxYear && lastMonth < maxMonth)) {
@@ -99,15 +105,15 @@ class MainFragment : Fragment() {
             monthsList.addView(newMonthView)
         }
 
-        // 2. Control visibility: show current month and the next 24 months, hide the rest
+        // 2. Control visibility: show months from 4 months ago up to 24 months in the future
         monthsList.children.forEach { child ->
             val monthView = child as MonthView
             val (m, y) = monthView.getMonthYear()
 
-            val isFutureOrCurrent = y > currentYear || (y == currentYear && m >= currentMonth)
-            val isWithin2Years = y < maxYear || (y == maxYear && m <= maxMonth)
+            val isAfterMin = y > minYear || (y == minYear && m >= minMonth)
+            val isBeforeMax = y < maxYear || (y == maxYear && m <= maxMonth)
 
-            if (isFutureOrCurrent && isWithin2Years) {
+            if (isAfterMin && isBeforeMax) {
                 monthView.visibility = View.VISIBLE
             } else {
                 monthView.visibility = View.GONE
