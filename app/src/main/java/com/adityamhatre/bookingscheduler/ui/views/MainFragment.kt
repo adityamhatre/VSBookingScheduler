@@ -75,18 +75,43 @@ class MainFragment : Fragment() {
         loadMonthlyBookingsCount(view)
     }
 
-    // adds 1 year from current year
-    private fun addExtraMonths(monthsList: LinearLayout) {
-        val (lastMonth, lastYear) = (monthsList[monthsList.childCount - 1] as MonthView).getMonthYear()
-        var newMonth = lastMonth
-        var newYear = lastYear
-        for (i in 0..11) {
-            newMonth += 1
-            if (newMonth > 12) {
-                newMonth = 1
-                newYear += 1
+    // Adds rolling months dynamically and controls visibility for a 2-year window
+    private fun setupRollingMonths(monthsList: LinearLayout) {
+        val calendar = Calendar.getInstance(TimeZone.getTimeZone(ZoneId.systemDefault()))
+        val currentYear = calendar.get(Calendar.YEAR)
+        val currentMonth = calendar.get(Calendar.MONTH) + 1 // 1-indexed
+
+        // Show a rolling window of 2 years (24 months) from the current month
+        val maxCalendar = Calendar.getInstance(TimeZone.getTimeZone(ZoneId.systemDefault()))
+        maxCalendar.add(Calendar.MONTH, 24)
+        val maxYear = maxCalendar.get(Calendar.YEAR)
+        val maxMonth = maxCalendar.get(Calendar.MONTH) + 1
+
+        // 1. Appends new MonthViews programmatically if they are not yet in the layout
+        var (lastMonth, lastYear) = (monthsList[monthsList.childCount - 1] as MonthView).getMonthYear()
+        while (lastYear < maxYear || (lastYear == maxYear && lastMonth < maxMonth)) {
+            lastMonth++
+            if (lastMonth > 12) {
+                lastMonth = 1
+                lastYear++
             }
-//            printMonths(newMonth, newYear)
+            val newMonthView = MonthView(requireContext(), lastMonth, lastYear)
+            monthsList.addView(newMonthView)
+        }
+
+        // 2. Control visibility: show current month and the next 24 months, hide the rest
+        monthsList.children.forEach { child ->
+            val monthView = child as MonthView
+            val (m, y) = monthView.getMonthYear()
+
+            val isFutureOrCurrent = y > currentYear || (y == currentYear && m >= currentMonth)
+            val isWithin2Years = y < maxYear || (y == maxYear && m <= maxMonth)
+
+            if (isFutureOrCurrent && isWithin2Years) {
+                monthView.visibility = View.VISIBLE
+            } else {
+                monthView.visibility = View.GONE
+            }
         }
     }
 
@@ -148,7 +173,7 @@ class MainFragment : Fragment() {
             }
         })
 
-        addExtraMonths(view.findViewById<LinearLayout>(R.id.yearList))
+        setupRollingMonths(view.findViewById<LinearLayout>(R.id.yearList))
 
         view.findViewById<LinearLayout>(R.id.yearList).children.forEachIndexed { i, it ->
             val monthView = it as MonthView

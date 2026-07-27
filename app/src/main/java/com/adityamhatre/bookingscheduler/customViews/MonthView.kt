@@ -12,7 +12,11 @@ import com.adityamhatre.bookingscheduler.R
 import java.util.*
 
 
-class MonthView(context: Context, attrs: AttributeSet) : LinearLayout(context, attrs) {
+class MonthView @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : LinearLayout(context, attrs, defStyleAttr) {
     fun interface DateClickedListener {
         fun onDateClicked(date: Int, month: Int, year: Int)
     }
@@ -27,8 +31,8 @@ class MonthView(context: Context, attrs: AttributeSet) : LinearLayout(context, a
 
     private val view by lazy { inflate(context, R.layout.month_view, this) }
 
-    private val month: Int
-    private val year: Int
+    private var month: Int = 1
+    private var year: Int = 1970
     private var count: Int = 0
     private var titleText = ""
 
@@ -43,21 +47,29 @@ class MonthView(context: Context, attrs: AttributeSet) : LinearLayout(context, a
         R.id.week6
     )
 
+    constructor(context: Context, month: Int, year: Int) : this(context, null) {
+        this.month = month
+        this.year = year
+        this.titleText = "${getMonthName()} $year"
+        fillWeeks()
+    }
 
     init {
-        context.theme.obtainStyledAttributes(attrs, R.styleable.MonthView, 0, 0)
-            .apply {
-                try {
-                    month = getString(R.styleable.MonthView_month)?.toInt() ?: 1
-                    year = getInt(R.styleable.MonthView_year, 1970)
+        if (attrs != null) {
+            context.theme.obtainStyledAttributes(attrs, R.styleable.MonthView, 0, 0)
+                .apply {
+                    try {
+                        month = getString(R.styleable.MonthView_month)?.toInt() ?: 1
+                        year = getInt(R.styleable.MonthView_year, 1970)
 
-                    titleText = "${getMonthName()} $year"
+                        titleText = "${getMonthName()} $year"
 
-                    fillWeeks()
-                } finally {
-                    recycle()
+                        fillWeeks()
+                    } finally {
+                        recycle()
+                    }
                 }
-            }
+        }
     }
 
     private fun fillWeeks() {
