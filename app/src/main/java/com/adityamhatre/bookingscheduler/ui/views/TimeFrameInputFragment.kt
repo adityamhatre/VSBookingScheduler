@@ -50,14 +50,14 @@ class TimeFrameInputFragment() :
                     date,
                     month,
                     year,
-                    if (viewModel.checkInDateTime.hour == -1) 9 else viewModel.checkInDateTime.hour,
-                    if (viewModel.checkInDateTime.minute == -1) 30 else viewModel.checkInDateTime.minute
+                    if (viewModel.checkInDateTime.hour == -1) 12 else viewModel.checkInDateTime.hour,
+                    if (viewModel.checkInDateTime.minute == -1) 0 else viewModel.checkInDateTime.minute
                 )
                 viewModel.checkOutDateTime = AppDateTime(
                     if (viewModel.checkOutDateTime.date == -1) date else viewModel.checkOutDateTime.date,
                     if (viewModel.checkOutDateTime.month == -1) month else viewModel.checkOutDateTime.month,
                     if (viewModel.checkOutDateTime.year == -1) year else viewModel.checkOutDateTime.year,
-                    if (viewModel.checkOutDateTime.hour == -1) 17 else viewModel.checkOutDateTime.hour,
+                    if (viewModel.checkOutDateTime.hour == -1) 16 else viewModel.checkOutDateTime.hour,
                     if (viewModel.checkOutDateTime.minute == -1) 0 else viewModel.checkOutDateTime.minute
                 )
                 viewModel.isOneDayBooking = isOneDayBooking
@@ -131,12 +131,12 @@ class TimeFrameInputFragment() :
 
         oneDayTimingRadioGroup.setOnCheckedChangeListener { _, id ->
             when (id) {
-                R.id.one_day_booking_timing_9_30_am_to_5_00_pm -> {
-                    viewModel.checkInDateTime.hour = 9
-                    viewModel.checkInDateTime.minute = 30
+                R.id.one_day_booking_timing_12_00_pm_to_4_00_pm -> {
+                    viewModel.checkInDateTime.hour = 12
+                    viewModel.checkInDateTime.minute = 0
 
                     viewModel.checkOutDateTime = viewModel.checkInDateTime.copy()
-                    viewModel.checkOutDateTime.hour = 17
+                    viewModel.checkOutDateTime.hour = 16
                     viewModel.checkOutDateTime.minute = 0
                 }
                 R.id.one_day_booking_timing_4_00_pm_to_11_55_pm -> {
@@ -211,11 +211,13 @@ class TimeFrameInputFragment() :
         val checkInTime = view.findViewById<RadioGroup>(R.id.check_in_time)
 
         checkInTime.setOnCheckedChangeListener { _, checkedId ->
-            if (checkedId == R.id._9_30am) {
-                viewModel.checkInDateTime.hour = 9
+            if (checkedId == R.id._12_00pm) {
+                viewModel.checkInDateTime.hour = 12
+                viewModel.checkInDateTime.minute = 0
             }
             if (checkedId == R.id._5_30pm) {
                 viewModel.checkInDateTime.hour = 17
+                viewModel.checkInDateTime.minute = 30
             }
             if (viewModel.alreadyChecked) {
                 checkAvailability(view)
@@ -389,11 +391,11 @@ class TimeFrameInputFragment() :
         val checkOutTime = view.findViewById<RadioGroup>(R.id.check_out_time)
 
         checkOutTime.setOnCheckedChangeListener { _, checkedId ->
-            if (checkedId == R.id._9am) {
-                viewModel.checkOutDateTime.hour = 9
+            if (checkedId == R.id._11am) {
+                viewModel.checkOutDateTime.hour = 11
             }
-            if (checkedId == R.id._5pm) {
-                viewModel.checkOutDateTime.hour = 17
+            if (checkedId == R.id._4pm) {
+                viewModel.checkOutDateTime.hour = 16
             }
             if (viewModel.alreadyChecked) {
                 checkAvailability(view)

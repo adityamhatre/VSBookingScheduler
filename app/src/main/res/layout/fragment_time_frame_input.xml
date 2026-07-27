@@ -59,11 +59,11 @@
                             android:layout_marginTop="12dp">
 
                             <com.google.android.material.radiobutton.MaterialRadioButton
-                                android:id="@+id/one_day_booking_timing_9_30_am_to_5_00_pm"
+                                android:id="@+id/one_day_booking_timing_12_00_pm_to_4_00_pm"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:checked="true"
-                                android:text="@string/_9_30_am_to_5_00_pm" />
+                                android:text="@string/_12_00_pm_to_4_00_pm" />
 
                             <com.google.android.material.radiobutton.MaterialRadioButton
                                 android:id="@+id/one_day_booking_timing_4_00_pm_to_11_55_pm"
@@ -112,12 +112,12 @@
                                 android:orientation="horizontal">
 
                                 <com.google.android.material.radiobutton.MaterialRadioButton
-                                    android:id="@+id/_9_30am"
+                                    android:id="@+id/_12_00pm"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:checked="true"
-                                    android:text="@string/_9_30_am"
+                                    android:text="@string/_12_00_pm"
                                     android:textSize="13sp" />
 
                                 <com.google.android.material.radiobutton.MaterialRadioButton
@@ -159,20 +159,20 @@
                             android:orientation="horizontal">
 
                             <com.google.android.material.radiobutton.MaterialRadioButton
-                                android:id="@+id/_9am"
+                                android:id="@+id/_11am"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="@string/_9_00_am"
+                                android:text="@string/_11_00_am"
                                 android:textSize="13sp" />
 
                             <com.google.android.material.radiobutton.MaterialRadioButton
-                                android:id="@+id/_5pm"
+                                android:id="@+id/_4pm"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:checked="true"
-                                android:text="@string/_5_00_pm"
+                                android:text="@string/_4_00_pm"
                                 android:textSize="13sp" />
                         </RadioGroup>
                     </LinearLayout>
