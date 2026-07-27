@@ -56,7 +56,7 @@
     <string name="notes">Notes</string>
     <string name="booking_updated">Booking Updated</string>
     <string name="one_day_booking_select_one_of_the_timings">One day booking\nSelect one of the timings</string>
-    <string name="_12_00_pm_to_4_00_pm">12:00 PM to 4:00 PM</string>
+    <string name="_9_30_am_to_5_00_pm">9:30 AM to 5:00 PM</string>
     <string name="_4_00_pm_to_11_55_pm">4:00 PM to 11:55 PM</string>
     <string name="booking_tomorrow">Tomorrow Booking</string>
     <string name="booking_tomorrow_channel_id">dd70ff9c-f752-4aef-9362-745ba10baf12</string>

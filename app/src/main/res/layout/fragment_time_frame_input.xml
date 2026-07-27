@@ -59,11 +59,11 @@
                             android:layout_marginTop="12dp">
 
                             <com.google.android.material.radiobutton.MaterialRadioButton
-                                android:id="@+id/one_day_booking_timing_12_00_pm_to_4_00_pm"
+                                android:id="@+id/one_day_booking_timing_9_30_am_to_5_00_pm"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:checked="true"
-                                android:text="@string/_12_00_pm_to_4_00_pm" />
+                                android:text="@string/_9_30_am_to_5_00_pm" />
 
                             <com.google.android.material.radiobutton.MaterialRadioButton
                                 android:id="@+id/one_day_booking_timing_4_00_pm_to_11_55_pm"

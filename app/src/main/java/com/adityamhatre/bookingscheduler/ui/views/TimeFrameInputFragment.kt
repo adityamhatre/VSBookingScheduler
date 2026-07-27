@@ -131,12 +131,12 @@ class TimeFrameInputFragment() :
 
         oneDayTimingRadioGroup.setOnCheckedChangeListener { _, id ->
             when (id) {
-                R.id.one_day_booking_timing_12_00_pm_to_4_00_pm -> {
-                    viewModel.checkInDateTime.hour = 12
-                    viewModel.checkInDateTime.minute = 0
+                R.id.one_day_booking_timing_9_30_am_to_5_00_pm -> {
+                    viewModel.checkInDateTime.hour = 9
+                    viewModel.checkInDateTime.minute = 30
 
                     viewModel.checkOutDateTime = viewModel.checkInDateTime.copy()
-                    viewModel.checkOutDateTime.hour = 16
+                    viewModel.checkOutDateTime.hour = 17
                     viewModel.checkOutDateTime.minute = 0
                 }
                 R.id.one_day_booking_timing_4_00_pm_to_11_55_pm -> {
