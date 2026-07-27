@@ -94,6 +94,10 @@ enum class Accommodation(val readableName: String, val calendarId: String) {
     SHREE_SWAMI_SAMARTH_BANQUET_HALL(
         "Shree Swami Samarth Banquet Hall",
         Application.getApplicationContext().getString(R.string.swami_samarth_hall)
+    ),
+    SUMANGAL_SANGAL_SABHAGRUH(
+        "Sumangal Sangal Sabhagruh",
+        Application.getApplicationContext().getString(R.string.sumangal_sangal_sabhagruh_id)
     );
 
     companion object {
