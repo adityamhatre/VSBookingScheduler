@@ -9,11 +9,11 @@ enum class Accommodation(val readableName: String, val calendarId: String) {
         Application.getApplicationContext().getString(R.string.bungalow_3_1_id)
     ),
     SPECIAL_ROOM_1(
-        "Special Room 1",
+        "Aaram Room 4",
         Application.getApplicationContext().getString(R.string.special_room_1_id)
     ),
     SPECIAL_ROOM_2(
-        "Special Room 2",
+        "Aaram Room 5",
         Application.getApplicationContext().getString(R.string.special_room_2_id)
     ),
     ROOM_1_VIHAR(
