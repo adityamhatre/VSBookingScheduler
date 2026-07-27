@@ -13,16 +13,37 @@ android {
         applicationId "com.adityamhatre.bookingscheduler"
         minSdk 26
         targetSdk 36
-        versionCode 34
-        versionName "2.7"
+        versionCode 35
+        versionName "2.8"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+        release {
+            def localProperties = new Properties()
+            def localPropertiesFile = rootProject.file('local.properties')
+            if (localPropertiesFile.exists()) {
+                localPropertiesFile.withReader('UTF-8') { reader ->
+                    localProperties.load(reader)
+                }
+            }
+
+            def keystorePath = localProperties.getProperty('release.keystore')
+            if (keystorePath != null) {
+                storeFile file(keystorePath)
+                storePassword localProperties.getProperty('release.keystore.password')
+                keyAlias localProperties.getProperty('release.key.alias')
+                keyPassword localProperties.getProperty('release.key.password')
+            }
+        }
     }
 
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 

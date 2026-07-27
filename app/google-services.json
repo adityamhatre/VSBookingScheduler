@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "252878403524",
+    "firebase_url": "https://vs-booking-scheduler-default-rtdb.firebaseio.com",
     "project_id": "vs-booking-scheduler",
     "storage_bucket": "vs-booking-scheduler.appspot.com"
   },
@@ -19,6 +20,14 @@
           "android_info": {
             "package_name": "com.adityamhatre.bookingscheduler",
             "certificate_hash": "4ffec4fcbe02f31c31772d2846d0580f94b2612f"
+          }
+        },
+        {
+          "client_id": "252878403524-s3irsdbqi4co93jbfgs8s05ddhsvg1h0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.adityamhatre.bookingscheduler",
+            "certificate_hash": "871012e973b140a1e0196b56d48eca2e273bb087"
           }
         },
         {

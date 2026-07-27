@@ -94,7 +94,12 @@ class GoogleSignInFragment : Fragment() {
             val account: GoogleSignInAccount? = task.getResult(ApiException::class.java)
             onSuccessLogin(account)
         } catch (e: ApiException) {
-            Log.e(TAG, e.statusCode.toString())
+            Log.e(TAG, "Sign-in failed: ${e.statusCode}", e)
+            Toast.makeText(
+                context,
+                "Google Sign-In failed with code: ${e.statusCode}. Please check if the SHA-1 is registered in the developer console.",
+                Toast.LENGTH_LONG
+            ).show()
         }
     }
 
