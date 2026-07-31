@@ -23,42 +23,62 @@ import org.json.JSONObject
 import java.io.File
 
 
-class RenderService(context: Context) {
+class RenderService(private val context: Context) {
     private val queue = Volley.newRequestQueue(context)
     private val baseUrl = "https://vs-booking-scheduler-push-notify-server.onrender.com"
 
+    private fun getAuthHeaders(): MutableMap<String, String> {
+        val headers = HashMap<String, String>()
+        headers["Content-Type"] = "application/json"
+        try {
+            val app = context.applicationContext as com.adityamhatre.bookingscheduler.Application
+            val scope = "oauth2:https://www.googleapis.com/auth/calendar"
+            val token = com.google.android.gms.auth.GoogleAuthUtil.getToken(context, app.account, scope)
+            headers["Authorization"] = "Bearer $token"
+        } catch (e: Exception) {
+            Log.e("RenderService", "Failed to get Google OAuth token for backend authentication", e)
+        }
+        return headers
+    }
+
     fun notifyNewBooking(bookingDetails: BookingDetails) {
-        val request = JsonObjectRequest(
+        val request = object : JsonObjectRequest(
             Request.Method.POST,
             "$baseUrl/notifications/newBookingCreated",
             bookingDetails.toNotificationServerJson(),
             {},
             {}
-        )
+        ) {
+            override fun getHeaders(): MutableMap<String, String> = getAuthHeaders()
+        }
 
         queue.addWithRetry(request)
     }
 
     fun notifyUpdateBooking(bookingDetails: BookingDetails) {
-        val request = JsonObjectRequest(
+        val request = object : JsonObjectRequest(
             Request.Method.POST,
             "$baseUrl/notifications/updatedBooking",
             bookingDetails.toNotificationServerJson(),
             {},
             {}
-        )
+        ) {
+            override fun getHeaders(): MutableMap<String, String> = getAuthHeaders()
+        }
 
         queue.addWithRetry(request)
     }
 
     fun removeBooking(bookingDetails: BookingDetails) {
-        val request = JsonObjectRequest(
+        val request = object : JsonObjectRequest(
             Request.Method.POST,
             "$baseUrl/deleteBooking",
             bookingDetails.toNotificationServerJson(),
             {},
             {}
-        )
+        ) {
+            override fun getHeaders(): MutableMap<String, String> = getAuthHeaders()
+        }
 
         queue.addWithRetry(request)
     }

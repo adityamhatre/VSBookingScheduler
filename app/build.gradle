@@ -13,8 +13,8 @@ android {
         applicationId "com.adityamhatre.bookingscheduler"
         minSdk 26
         targetSdk 36
-        versionCode 38
-        versionName "2.11"
+        versionCode 39
+        versionName "2.12"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
